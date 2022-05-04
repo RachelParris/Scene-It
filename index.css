@@ -2,6 +2,19 @@ body {
 	background-color: #B2E9FD;
 }
 
+img {
+	width: 50%;
+	height: 50%;
+}
+
+.movies-container {
+	/* border: 2px solid red; */
+}
+
+.movie {
+	margin: 10px;
+}
+
 .header h2 {
 	color: #DC4247;
 }
