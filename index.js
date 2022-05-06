@@ -37,12 +37,27 @@ let saveToWatchlist = (movieId) => {
     localStorage.setItem('watchlist', watchlistJSON);
 }
 
+let callOMDB = (queryString) => {
+    fetch(`http://www.omdbapi.com/?apikey=59354c85&s=${queryString}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const formSubmit = document.getElementById('form-submit');
 
     // TODO: Change to submit event
     formSubmit.addEventListener('click', function(event){
         event.preventDefault();
+
+        // Capture user typed input
+        const searchString = document.getElementById('search-bar').value;
+        // "Sanitize" the user input so there will not be spaces
+        const urlEncodedSearchString = encodeURIComponent(searchString);
+
+        callOMDB(urlEncodedSearchString);
 
         // Render movie cards to the page
         let render = renderMovies(movieData);
