@@ -21,11 +21,12 @@ let saveToWatchlist = (movieId) => {
     let watchlistJSON = localStorage.getItem('watchlist');
     let watchlist = JSON.parse(watchlistJSON);
     
-
+    // Loop through all movies in movieData until a matching movie is found
     let movie = movieData.find((currentMovie) => {
         return currentMovie.imdbID == movieId;
     });
     
+    // If watchlist does not exist, create empty array
     if (watchlist == null) {
         watchlist = [];
     }
@@ -35,21 +36,6 @@ let saveToWatchlist = (movieId) => {
     watchlistJSON = JSON.stringify(watchlist);
     localStorage.setItem('watchlist', watchlistJSON);
 }
-
-/*
-Use an if-statement to check if the watchlist is null
-a) If it is null, set watchlist to an empty array
-b) Try this on your own! Call for attention if you’re having trouble with this
-one.
-7) Push movie into the watchlist
-watchlist.push(movie);
-8) Turn the watchlist back into JSON
-watchlistJSON = JSON.stringify(watchlist);
-9) Save the JSONified watchlist back into local storage
-localStorage.setItem('watchlist', watchlistJSON);
-And that’s it! Now, when you click the add button for any given, you should see it’s data
-saved into local storage under the key “watchlist”!
-*/
 
 document.addEventListener('DOMContentLoaded', function() {
     const formSubmit = document.getElementById('form-submit');
