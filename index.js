@@ -20,12 +20,36 @@ let renderMovies = (movieArray) => {
 let saveToWatchlist = (movieId) => {
     let watchlistJSON = localStorage.getItem('watchlist');
     let watchlist = JSON.parse(watchlistJSON);
-    localStorage.setItem('watchlist', watchlistJSON);
     
+
     let movie = movieData.find((currentMovie) => {
-        return currentMovie.imdbId == movieId;
+        return currentMovie.imdbID == movieId;
     });
+    
+    if (watchlist == null) {
+        watchlist = [];
+    }
+
+    watchlist.push(movie);
+
+    watchlistJSON = JSON.stringify(watchlist);
+    localStorage.setItem('watchlist', watchlistJSON);
 }
+
+/*
+Use an if-statement to check if the watchlist is null
+a) If it is null, set watchlist to an empty array
+b) Try this on your own! Call for attention if you’re having trouble with this
+one.
+7) Push movie into the watchlist
+watchlist.push(movie);
+8) Turn the watchlist back into JSON
+watchlistJSON = JSON.stringify(watchlist);
+9) Save the JSONified watchlist back into local storage
+localStorage.setItem('watchlist', watchlistJSON);
+And that’s it! Now, when you click the add button for any given, you should see it’s data
+saved into local storage under the key “watchlist”!
+*/
 
 document.addEventListener('DOMContentLoaded', function() {
     const formSubmit = document.getElementById('form-submit');
@@ -43,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let list = event.target.classList;
 
         if (list.contains('add-button')) {
+            // Target the indiviual movie
             let movie = event.target.dataset.imdbid;
             saveToWatchlist(movie);
         }
